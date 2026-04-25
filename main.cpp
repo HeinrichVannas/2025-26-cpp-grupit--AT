@@ -1,4 +1,5 @@
 #include "sudokuväli.h"
+#include "lahendaja.h"
 
 
 int main(){
@@ -15,13 +16,19 @@ int main(){
         {0, 0, 0 ,0 ,8 ,0 ,0 ,7 ,9}
     };
 
-    sudokuväli<9> väli;
+    sudokuväli<9> väli{};
     väli.täida(sisend);
     väli.väljasta();
 
-    cout << väli.onReas(0, 7) << '\n';
-    cout << väli.onVeerus(0, 8) << '\n';
-    cout << väli.onKastis(4, 6, 8) << '\n';
+    cout << väli.onReas(0, 0, 7) << '\n';
+    cout << väli.onVeerus(0,0, 8) << '\n';
+    cout << väli.onKastis(4, 6, 8) << "\n\n";
+
+    lahendaSudoku(väli);
+    väli.väljasta();
+    cout << '\n';
+    cout << väli.kontrolli() << "\n\n";
+
 
     int sisend2[6][6] = {
         {1, 0, 0, 0, 0, 0},
@@ -32,13 +39,19 @@ int main(){
         {0, 0, 0, 0, 0, 6}
     };
 
-    sudokuväli<6> väli2;
+    sudokuväli<6> väli2{};
     väli2.täida(sisend2);
     väli2.väljasta();
 
-    cout << väli2.onReas(0, 1) << '\n';
-    cout << väli2.onVeerus(0, 2) << '\n';
-    cout << väli2.onKastis(4, 3, 4) << '\n';
+    cout << väli2.onReas(0, 1, 1) << '\n';
+    cout << väli2.onVeerus(0, 0, 2) << '\n';
+    cout << väli2.onKastis(4, 3, 4) << "\n\n";
+
+    lahendaSudoku(väli2);
+    väli2.väljasta();
+    cout << '\n';
+
+    cout << väli2.kontrolli() << "\n";
 
     return 0;
 }
