@@ -12,6 +12,9 @@ struct sudokuväli
     int väli[N][N];
 
 
+    /*
+     * Lihtne lineaarne funktsioon structi väljade täitmiseks kasutades teist int maatriksi
+     */
     void täida(int sisend[N][N])
     {
         for (int i = 0; i < N; i++)
@@ -22,7 +25,10 @@ struct sudokuväli
             }
         }
     }
-    
+
+    /*
+     * Lihtne viis väljastada kõik sudoku väljad
+     */
     void väljasta()
     {
         for (int i = 0; i < N; i++)
@@ -35,6 +41,13 @@ struct sudokuväli
         }
     }
 
+    /*
+     * Funktsioon kontrollib, kas antud number on juba reas olemas,
+     * jättes välja kontrollitava lahtri enda.
+     * rida: rida, mida kontrollitakse
+     * veerg: kontrollitava lahtri veerg (välistamiseks) (saab panna näiteks -1 kui ei taheta välistada)
+     * number: väärtus, mida otsitakse
+     */
     bool onReas(int rida, int veerg, int number)
     {
         for (int i = 0; i < N; i++)
@@ -48,6 +61,13 @@ struct sudokuväli
         return false;
     }
 
+    /*
+     * Funktsioon kontrollib, kas antud number on juba veerus olemas,
+     * jättes välja kontrollitava lahtri enda.
+     * rida: kontrollitava lahtri rida (välistamiseks)
+     * veerg: veerg, mida kontrollitakse
+     * number: väärtus, mida otsitakse
+     */
     bool onVeerus(int rida, int veerg, int number)
     {
         for (int i = 0; i < N; i++)
@@ -61,6 +81,13 @@ struct sudokuväli
         return false;
     }
 
+    /*
+     * Funktsioon kontrollib, kas antud number on sama kasti sees juba olemas,
+     * jättes välja kontrollitava lahtri enda.
+     * rida: kontrollitava lahtri rida
+     * veerg: kontrollitava lahtri veerg
+     * number: väärtus, mida otsitakse kastis
+     */
     bool onKastis(int rida, int veerg, int number)
     {
         int reaJagatav = sqrt(N) != static_cast<int>(sqrt(N)) ? sqrt(N) + 1 : sqrt(N);
@@ -83,6 +110,10 @@ struct sudokuväli
         return false;
     }
 
+    /*
+     * Leiab kõik arvud, mis sobivad korraga nii ritta, veergu kui ka kasti.
+     * Tagastab kandidaatide hulga antud lahtri jaoks.
+     */
     set<int> reaVeeruKastiÜhisosa(int rida, int veerg)
     {
         set<int> set1, set2, set3, set4, setfinal;
@@ -106,6 +137,10 @@ struct sudokuväli
         return setfinal;
     }
 
+    /*
+     * Kontrollib, kas kogu sudoku seis on korrektne.
+     * Tagastab true, kui üheski reas, veerus ega kastis pole vastuolu.
+     */
     bool kontrolli()
     {
         for (int i = 0; i < N; i++) {
